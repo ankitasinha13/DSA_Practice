@@ -1,31 +1,30 @@
 class Solution {
     public int numSpecial(int[][] mat) {
-        int row=mat.length;
-        int cols=mat[0].length;
-        int count=0;
-
-        for(int i=0;i<row;i++){
-            for(int j=0;j<cols;j++){
-                if(mat[i][j]==1){
-                    int rowCount=0;
-                    int colsCount=0;
-
-                    for(int k=0;k<cols;k++){
-                        if(mat[i][k]==1){
-                            rowCount++;
+       int m=mat.length;
+       int n=mat[0].length;
+       int count =0;
+       for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            if(mat[i][j]==1){
+                boolean special=true;
+                for (int col=0;col<n;col++) {
+                    if (col != j && mat[i][col] == 1) {
+                        special = false;
+                        break;
                         }
                     }
-                    for(int k=0;k<row;k++){
-                        if(mat[k][j]==1){
-                            colsCount++;
+                    for(int row = 0;row<m;row++){
+                        if(row!=i && mat[row][j]==1){
+                            special=false;
+                                break;
+                                }
+                            }
+                            if(special){
+                                count++;
+                            }
                         }
-                    }
-                    if(rowCount == 1 && colsCount==1){
-                        count++;
                     }
                 }
-            }
-        }
-        return count;
+       return count;
     }
 }
